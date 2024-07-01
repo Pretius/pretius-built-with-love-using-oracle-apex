@@ -1,0 +1,53 @@
+{
+    "manifest_version": 3,
+    "name": "Built with love using Oracle APEX",
+    "version": "24.1.1",
+    "description": "Displays a Red Heart and Info on webpages built with love using Oracle APEX",
+    "permissions": [
+        "scripting",
+        "activeTab"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup/popup.html",
+        "default_icon": {
+            "16": "icons/16_grey_heart.png",
+            "32": "icons/32_grey_heart.png",
+            "48": "icons/48_grey_heart.png",
+            "128": "icons/128_grey_heart.png"
+        }
+    },
+    "icons": {
+        "16": "icons/16_red_heart.png",
+        "32": "icons/32_red_heart.png",
+        "48": "icons/48_red_heart.png",
+        "128": "icons/128_red_heart.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "scripts/content-script.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "scripts/injected-script.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "short_name": "Built with love"
+}

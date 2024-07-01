@@ -1,0 +1,84 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  min-width: 400px;
+}
+
+/* Heading Styles */
+h3 {
+  text-align: center;
+}
+
+/* Utility Classes */
+.blue-none {
+  display: none;
+}
+
+/* Table Styles */
+.blue-theme {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  color: #1F90CB;
+}
+
+.blue-theme th,
+.blue-theme td {
+  padding: 8px;
+}
+
+.blue-theme th {
+  text-align: left;
+  background-color: #1F90CB;
+  color: #ffffff;
+}
+
+.blue-theme td {
+  color: #000000;
+}
+
+.blue-theme tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.blue-theme tr:hover {
+  background-color: #e6f7ff;
+}
+
+/* Footer Styles */
+.pretiusRevealerFooter {
+  margin-top: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 1px;
+  background-color: #f2f2f2;
+  color: #1F90CB;
+  text-align: center;
+  padding-left: 5px;
+  max-height: 22px;
+}
+
+/* Link Styles */
+a.pretiusRevealerLink {
+  cursor: pointer;
+  text-decoration: none;
+  color: #1F90CB !important;
+  font-size: 12px;
+}
+
+a.pretiusHiddenLink {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Footer Options */
+.pretiusFooterOptions {
+  float: left;
+}
+
+/* Popup Content Body */
+.popup-content-body {
+  margin: 6px;
+}

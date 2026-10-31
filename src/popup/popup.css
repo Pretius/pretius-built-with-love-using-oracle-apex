@@ -3,17 +3,12 @@ body {
   font-family: Arial, sans-serif;
   background-color: #ffffff;
   margin: 0;
-  min-width: 400px;
+  width: 560px;
 }
 
 /* Heading Styles */
 h3 {
   text-align: center;
-}
-
-/* Utility Classes */
-.blue-none {
-  display: none;
 }
 
 /* Table Styles */
@@ -48,15 +43,40 @@ h3 {
 }
 
 /* Footer Styles */
+/* Three columns: site link | centred LinkedIn links | version */
 .pretiusRevealerFooter {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
   margin-top: 20px;
   border: 1px solid lightgrey;
   border-radius: 1px;
   background-color: #f2f2f2;
   color: #1F90CB;
-  text-align: center;
-  padding-left: 5px;
-  max-height: 22px;
+  padding: 4px 6px;
+  font-size: 12px;
+}
+
+.pretiusSite {
+  justify-self: start;
+}
+
+.pretiusSocial {
+  display: flex;
+  gap: 16px;
+}
+
+.pretiusVersion {
+  justify-self: end;
+  color: #888888;
+}
+
+.blue-theme td:first-child {
+  white-space: nowrap;
+}
+
+.blue-theme td:last-child {
+  overflow-wrap: anywhere;
 }
 
 /* Link Styles */
@@ -71,11 +91,6 @@ a.pretiusHiddenLink {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-}
-
-/* Footer Options */
-.pretiusFooterOptions {
-  float: left;
 }
 
 /* Popup Content Body */

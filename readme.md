@@ -43,11 +43,19 @@ For pages not using Oracle APEX, it displays a heartbroken message.
 
 # Release History
 
+26.1.0 : October 2026
+* Popup now checks the page when opened, so tabs open before install/update are detected
+* Icon is set per tab (fixes wrong icon with multiple windows)
+* Security: page-supplied values are rendered as text, never HTML
+* Detection runs via `chrome.scripting` in the page's main world; no more content script, injected script, DOM attributes or web-accessible resources
+* Removed unneeded `activeTab` permission; requires Chrome 102+
+* Popup shows extension version; footer layout fixed
+
 24.1.1 : July 2024
 * Initial Version
 
 ## Built with ❤️ using Oracle APEX
 
-- Author: [Matt Mulvaney](https://x.com/Matt_Mulvaney)
+- Author: [Matt Mulvaney](https://www.linkedin.com/in/matt-mulvaney-541a659/)
 
-- Low-Code: [Pretius](https://x.com/PretiusSoftware)
+- Low-Code: [Pretius](https://www.linkedin.com/company/pretius)

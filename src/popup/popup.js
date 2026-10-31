@@ -1,78 +1,101 @@
+import { detectApex, setActionIcon } from '../lib/apex-detect.js';
+
+const APEX_URL = 'https://apex.oracle.com/';
+const APEX_TOKEN = '{apex}';
+
+const HEARTBROKEN_MESSAGES = [
+  `No love for ${APEX_TOKEN} here 💔`,
+  `Heartbroken without ${APEX_TOKEN} 💔`,
+  `${APEX_TOKEN} is missing, and so is the love 💔`,
+  `No ${APEX_TOKEN}, just heartache 💔`,
+  `Feeling the void of ${APEX_TOKEN} 💔`,
+  `${APEX_TOKEN} not found, only heartbreak 💔`,
+  `Lost without ${APEX_TOKEN} 💔`,
+  `${APEX_TOKEN} skipped, hearts broken 💔`,
+  `No ${APEX_TOKEN}, no love 💔`,
+  `Unbelievable, no ${APEX_TOKEN} 💔`,
+  `Without ${APEX_TOKEN}, it's just 💔`,
+  `No ${APEX_TOKEN}, son's crying now, cheers 💔`
+];
+
 document.addEventListener('DOMContentLoaded', initializePopup);
 
-var oaText = '<a class="pretiusHiddenLink" href="https://apex.oracle.com/" target="_blank">Oracle APEX</a>'
-var bwlText = `<h3>Built with ❤️ using ${oaText}</h3>`;
+async function initializePopup() {
+  const content = document.getElementById('content');
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-function initializePopup() {
-    const contentDiv = document.getElementById('content');
-    chrome.tabs.query({ active: true, currentWindow: true }, handleTabsQuery);
+  // Detect on open, so tabs loaded before install/update are still correct.
+  const result = tab && tab.id !== undefined
+    ? await detectApex(tab.id)
+    : { isApex: false, env: {} };
 
-    function handleTabsQuery(tabs) {
-        if (tabs && tabs.length > 0) {
-            let tabId = tabs[0].id;
-            chrome.runtime.sendMessage({ type: "GET_PAYLOAD", tabId: tabId }, handleResponse);
-        } else {
-            console.log("Failed to get active tab information");
-        }
+  if (tab && tab.id !== undefined) {
+    setActionIcon(tab.id, result.isApex);
+  }
+
+  const body = el('div', 'popup-content-body');
+  if (result.isApex) {
+    body.append(heading('Built with ❤️ using {apex}'));
+    if (Object.keys(result.env).length > 0) {
+      body.append(envTable(result.env));
     }
+    content.replaceChildren(body, footer());
+  } else {
+    const message = HEARTBROKEN_MESSAGES[Math.floor(Math.random() * HEARTBROKEN_MESSAGES.length)];
+    body.append(heading(message));
+    content.replaceChildren(body);
+  }
+}
 
-    function handleResponse(response) {
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
 
-        if (response && response.payload && response.payload.isApex == true) {
-            let apexEnv = response.payload.apexEnv; // Parse JSON string to object
-            if (Object.keys(apexEnv).length > 0) {
-                const tableHTML = generateTableHTML(apexEnv);
-                const footerHTML = generateFooterHTML();
+function link(href, text, className) {
+  const a = el('a', className, text);
+  a.href = href;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  return a;
+}
 
-                contentDiv.innerHTML = `<div class="popup-content-body">
-                                        ${bwlText}
-                                        ${tableHTML}
-                                    </div>
-                                    ${footerHTML}`;
-            }
-            else {
-                contentDiv.innerHTML = `<div class="popup-content-body">${bwlText}</div>`;
-            }
-        } else {
+// Builds an <h3>, replacing {apex} with an Oracle APEX link.
+function heading(template) {
+  const h3 = el('h3');
+  const [before, after = ''] = template.split(APEX_TOKEN);
+  h3.append(before, link(APEX_URL, 'Oracle APEX', 'pretiusHiddenLink'), after);
+  return h3;
+}
 
-            const messages = [
-                `No love for ${oaText} here 💔`,
-                `Heartbroken without ${oaText} 💔`,
-                `${oaText} is missing, and so is the love 💔`,
-                `No ${oaText}, just heartache 💔`,
-                `Feeling the void of ${oaText} 💔`,
-                `${oaText} not found, only heartbreak 💔`,
-                `Lost without ${oaText} 💔`,
-                `${oaText} skipped, hearts broken 💔`,
-                `No ${oaText}, no love 💔`,
-                `Unbelievable, no ${oaText} 💔`,
-                `Without ${oaText}, it's just 💔`,
-                `No ${oaText}, son's crying now, cheers 💔`
-            ];            
-            
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            contentDiv.innerHTML = `<div class="popup-content-body"><h3>${randomMessage}</h3></div>`;
-        }
-    }
+// Page-supplied values: textContent only, never innerHTML.
+function envTable(env) {
+  const table = el('table', 'blue-theme');
+  const headRow = el('tr');
+  headRow.append(el('th', null, 'Attribute'), el('th', null, 'Value'));
+  table.append(headRow);
 
-    function generateTableHTML(apexEnv) {
-        let tableHTML = '<table class="blue-theme">';
-        tableHTML += '<tr><th>Attribute</th><th>Value</th></tr>';
+  for (const [key, value] of Object.entries(env)) {
+    const row = el('tr');
+    row.append(el('td', null, key), el('td', null, value));
+    table.append(row);
+  }
+  return table;
+}
 
-        for (let key in apexEnv) {
-            tableHTML += `<tr><td>${key}</td><td>${apexEnv[key]}</td></tr>`;
-        }
-
-        tableHTML += '</table>';
-        return tableHTML;
-    }
-
-    function generateFooterHTML() {
-        return `<div class="pretiusRevealerFooter">
-                    <a class="pretiusRevealerLink pretiusFooterOptions" href="https://pretius.com/main/" target="_blank">Pretius</a>
-                    <a class="pretiusRevealerLink" href="https://twitter.com/Matt_Mulvaney" target="_blank">@Matt_Mulvaney</a>
-                    <a class="pretiusRevealerLink" href="https://twitter.com/PretiusSoftware" target="_blank">@PretiusSoftware</a>
-                    <div class="pretiusTablockVersion"></div>
-                </div>`;
-    }
+function footer() {
+  const div = el('div', 'pretiusRevealerFooter');
+  const social = el('div', 'pretiusSocial');
+  social.append(
+    link('https://www.linkedin.com/in/matt-mulvaney-541a659/', 'Matt Mulvaney', 'pretiusRevealerLink'),
+    link('https://www.linkedin.com/company/pretius', 'Pretius', 'pretiusRevealerLink')
+  );
+  div.append(
+    link('https://pretius.com/main/', 'pretius.com', 'pretiusRevealerLink pretiusSite'),
+    social,
+    el('span', 'pretiusVersion', `v${chrome.runtime.getManifest().version}`)
+  );
+  return div;
 }

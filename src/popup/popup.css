@@ -1,7 +1,38 @@
+/* Colour tokens: light by default, dark when the system asks for it */
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b6b6b;
+  --brand: #1F90CB;
+  --brand-text: #ffffff;
+  --row-alt: #f2f2f2;
+  --row-hover: #e6f7ff;
+  --border: #d3d3d3;
+  --surface: #f2f2f2;
+  --danger: #c62828;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1f1f1f;
+    --text: #e8e8e8;
+    --muted: #a0a0a0;
+    --brand: #4fb3e8;
+    --brand-text: #0b1a22;
+    --row-alt: #2a2a2a;
+    --row-hover: #12384d;
+    --border: #3d3d3d;
+    --surface: #2a2a2a;
+    --danger: #ef5350;
+  }
+}
+
 /* Global Styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #ffffff;
+  background-color: var(--bg);
+  color: var(--text);
   margin: 0;
   width: 560px;
 }
@@ -11,12 +42,35 @@ h3 {
   text-align: center;
 }
 
+/* Share | heading | copy menu. Equal side columns keep the heading centred. */
+.apex-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.apex-header h3 {
+  margin: 12px 0;
+}
+
+.header-share {
+  justify-self: start;
+  white-space: nowrap;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+  margin: 4px 0;
+}
+
 /* Table Styles */
 .blue-theme {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  color: #1F90CB;
 }
 
 .blue-theme th,
@@ -26,20 +80,163 @@ h3 {
 
 .blue-theme th {
   text-align: left;
-  background-color: #1F90CB;
-  color: #ffffff;
+  background-color: var(--brand);
+  color: var(--brand-text);
 }
 
 .blue-theme td {
-  color: #000000;
+  color: var(--text);
+}
+
+.blue-theme td:first-child {
+  white-space: nowrap;
+}
+
+.blue-theme td:last-child {
+  overflow-wrap: anywhere;
 }
 
 .blue-theme tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: var(--row-alt);
 }
 
 .blue-theme tr:hover {
-  background-color: #e6f7ff;
+  background-color: var(--row-hover);
+}
+
+/* Buttons */
+.btn {
+  font: inherit;
+  font-size: 12px;
+  padding: 5px 10px;
+  border: 1px solid var(--brand);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--brand);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--row-hover);
+}
+
+.btn:disabled {
+  cursor: default;
+  opacity: 0.8;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: var(--brand-text);
+}
+
+.btn-primary:hover {
+  background: var(--brand);
+  opacity: 0.9;
+}
+
+/* Hearts collected */
+.hearts {
+  margin: 8px 6px 0;
+  padding: 0 4px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.hearts p {
+  margin: 0 0 8px;
+}
+
+.hearts-count {
+  font-weight: bold;
+}
+
+/* Spacer | count | menu, so the count stays centred */
+.hearts-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.hearts .hearts-header p {
+  margin: 0;
+}
+
+/* "⋯" menu: opens upwards, over the table, so the popup never needs to grow */
+.menu {
+  position: relative;
+  justify-self: end;
+}
+
+.menu-toggle {
+  font-size: 16px;
+  line-height: 1;
+  padding: 2px 10px 6px;
+}
+
+.menu-list {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4px);
+  z-index: 10;
+  min-width: 190px;
+  padding: 4px 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+
+.menu-list.open-down {
+  bottom: auto;
+  top: calc(100% + 4px);
+}
+
+.menu-list[hidden] {
+  display: none;
+}
+
+.menu-item {
+  display: block;
+  width: 100%;
+  padding: 7px 12px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu-item:hover,
+.menu-item:focus-visible {
+  background: var(--row-hover);
+  outline: none;
+}
+
+.menu-item.danger {
+  color: var(--danger);
+}
+
+.hearts-list {
+  text-align: left;
+  margin: 0 0 4px;
+}
+
+.hearts-list summary {
+  cursor: pointer;
+  color: var(--brand);
+  text-align: center;
+}
+
+.hearts-list ul {
+  max-height: 140px;
+  overflow-y: auto;
+  margin: 8px 0 0;
+  padding-left: 24px;
 }
 
 /* Footer Styles */
@@ -48,11 +245,9 @@ h3 {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  margin-top: 20px;
-  border: 1px solid lightgrey;
-  border-radius: 1px;
-  background-color: #f2f2f2;
-  color: #1F90CB;
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  background-color: var(--surface);
   padding: 4px 6px;
   font-size: 12px;
 }
@@ -68,22 +263,14 @@ h3 {
 
 .pretiusVersion {
   justify-self: end;
-  color: #888888;
-}
-
-.blue-theme td:first-child {
-  white-space: nowrap;
-}
-
-.blue-theme td:last-child {
-  overflow-wrap: anywhere;
+  color: var(--muted);
 }
 
 /* Link Styles */
 a.pretiusRevealerLink {
   cursor: pointer;
   text-decoration: none;
-  color: #1F90CB !important;
+  color: var(--brand);
   font-size: 12px;
 }
 

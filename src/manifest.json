@@ -1,8 +1,9 @@
 {
     "manifest_version": 3,
     "name": "Built with love using Oracle APEX",
-    "version": "26.1.0",
-    "description": "Displays a Red Heart and Info on webpages built with love using Oracle APEX",
+    "version": "26.2.0",
+    "description": "__MSG_extDescription__",
+    "default_locale": "en",
     "minimum_chrome_version": "102",
     "permissions": [
         "scripting"

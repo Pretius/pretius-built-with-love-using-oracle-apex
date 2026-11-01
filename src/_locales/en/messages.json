@@ -1,0 +1,53 @@
+{
+  "extDescription": { "message": "Displays a red heart and info on webpages built with love using Oracle APEX" },
+  "builtWith": { "message": "Built with ❤️ using {apex}" },
+  "heartbroken1": { "message": "No {apex}. Dog won't look at me 💔" },
+  "heartbroken2": { "message": "No {apex}. Not angry, just disappointed 💔" },
+  "heartbroken3": { "message": "No {apex}. I'll just sit here then 💔" },
+  "heartbroken4": { "message": "No {apex}. Cancelled the cake 💔" },
+  "heartbroken5": { "message": "No {apex}. Shan't be visiting again 💔" },
+  "heartbroken6": { "message": "No {apex}. Someone hand-coded all this. On purpose 💔" },
+  "heartbroken7": { "message": "No {apex}. Bet their sprint took six weeks 💔" },
+  "heartbroken8": { "message": "No {apex}. Absolute scenes 💔" },
+  "heartbroken9": { "message": "No {apex}, son's crying now, cheers 💔" },
+  "attribute": { "message": "Attribute" },
+  "value": { "message": "Value" },
+  "foundInFrame": {
+    "message": "Found in an embedded frame on $HOST$",
+    "placeholders": { "host": { "content": "$1", "example": "example.com" } }
+  },
+  "copyMenu": { "message": "Copy" },
+  "copyJson": { "message": "Copy JSON" },
+  "copyMarkdown": { "message": "Copy Markdown" },
+  "copied": { "message": "Copied!" },
+  "copyFailed": { "message": "Copy failed" },
+  "shareSite": { "message": "Share on LinkedIn" },
+  "shareSiteText": {
+    "message": "$SITE$ is built with ❤️ using #OracleAPEX\n\nSpotted with the Built with ❤️ using Oracle APEX extension: $STORE$",
+    "placeholders": {
+      "site": { "content": "$1", "example": "https://example.com/" },
+      "store": { "content": "$2", "example": "https://chromewebstore.google.com/..." }
+    }
+  },
+  "heartsIntro": { "message": "Collect hearts: count the Oracle APEX sites you find. Stored encrypted, only on this device." },
+  "heartsTurnOn": { "message": "Start collecting" },
+  "heartsTurnOff": { "message": "Stop collecting" },
+  "heartsCount": {
+    "message": "❤️ Hearts collected: $COUNT$",
+    "placeholders": { "count": { "content": "$1", "example": "12" } }
+  },
+  "heartsShow": { "message": "Show sites" },
+  "heartsMenu": { "message": "Hearts options" },
+  "heartsShare": { "message": "Share hearts" },
+  "heartsShareText": {
+    "message": "Hearts collected from sites built with #OracleAPEX: $COUNT$ ❤️\n\nCollect your own with the Built with ❤️ using Oracle APEX extension: $STORE$",
+    "placeholders": {
+      "count": { "content": "$1", "example": "12" },
+      "store": { "content": "$2", "example": "https://chromewebstore.google.com/..." }
+    }
+  },
+  "heartsClear": { "message": "Clear" },
+  "heartsClearConfirm": { "message": "Click again to clear" },
+  "heartsEmpty": { "message": "No hearts yet. Visit some Oracle APEX sites!" },
+  "heartsError": { "message": "Couldn't load your hearts." }
+}

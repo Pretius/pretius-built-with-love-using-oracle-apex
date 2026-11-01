@@ -1,0 +1,53 @@
+{
+  "extDescription": { "message": "Toont een rood hart en info op webpagina's die met liefde zijn gebouwd met Oracle APEX" },
+  "builtWith": { "message": "Gebouwd met ❤️ in {apex}" },
+  "heartbroken1": { "message": "Geen {apex}. De hond kijkt me niet meer aan 💔" },
+  "heartbroken2": { "message": "Geen {apex}. Niet boos, wel teleurgesteld 💔" },
+  "heartbroken3": { "message": "Geen {apex}. Dan ga ik hier maar gewoon zitten 💔" },
+  "heartbroken4": { "message": "Geen {apex}. Taart afgezegd 💔" },
+  "heartbroken5": { "message": "Geen {apex}. Hier kom ik niet meer 💔" },
+  "heartbroken6": { "message": "Geen {apex}. Iemand heeft dit allemaal met de hand geschreven. Expres 💔" },
+  "heartbroken7": { "message": "Geen {apex}. Wedden dat hun sprint zes weken duurde 💔" },
+  "heartbroken8": { "message": "Geen {apex}. Wat een taferelen 💔" },
+  "heartbroken9": { "message": "Geen {apex}, zoon huilt nu, bedankt 💔" },
+  "attribute": { "message": "Attribuut" },
+  "value": { "message": "Waarde" },
+  "foundInFrame": {
+    "message": "Gevonden in een ingesloten frame op $HOST$",
+    "placeholders": { "host": { "content": "$1", "example": "example.com" } }
+  },
+  "copyMenu": { "message": "Kopiëren" },
+  "copyJson": { "message": "JSON kopiëren" },
+  "copyMarkdown": { "message": "Markdown kopiëren" },
+  "copied": { "message": "Gekopieerd!" },
+  "copyFailed": { "message": "Kopiëren mislukt" },
+  "shareSite": { "message": "Delen op LinkedIn" },
+  "shareSiteText": {
+    "message": "$SITE$ is met ❤️ gebouwd in #OracleAPEX\n\nGespot met de extensie 'Built with ❤️ using Oracle APEX': $STORE$",
+    "placeholders": {
+      "site": { "content": "$1", "example": "https://example.com/" },
+      "store": { "content": "$2", "example": "https://chromewebstore.google.com/..." }
+    }
+  },
+  "heartsIntro": { "message": "Verzamel hartjes: tel de Oracle APEX-sites die je vindt. Versleuteld opgeslagen, alleen op dit apparaat." },
+  "heartsTurnOn": { "message": "Beginnen met verzamelen" },
+  "heartsTurnOff": { "message": "Stoppen met verzamelen" },
+  "heartsCount": {
+    "message": "❤️ Verzamelde hartjes: $COUNT$",
+    "placeholders": { "count": { "content": "$1", "example": "12" } }
+  },
+  "heartsShow": { "message": "Sites tonen" },
+  "heartsMenu": { "message": "Opties voor hartjes" },
+  "heartsShare": { "message": "Hartjes delen" },
+  "heartsShareText": {
+    "message": "Verzamelde hartjes van sites gebouwd met #OracleAPEX: $COUNT$ ❤️\n\nVerzamel je eigen met de extensie 'Built with ❤️ using Oracle APEX': $STORE$",
+    "placeholders": {
+      "count": { "content": "$1", "example": "12" },
+      "store": { "content": "$2", "example": "https://chromewebstore.google.com/..." }
+    }
+  },
+  "heartsClear": { "message": "Wissen" },
+  "heartsClearConfirm": { "message": "Klik nogmaals om te wissen" },
+  "heartsEmpty": { "message": "Nog geen hartjes. Bezoek wat Oracle APEX-sites!" },
+  "heartsError": { "message": "Kon je hartjes niet laden." }
+}

@@ -8,6 +8,14 @@ For pages not using Oracle APEX, it displays a heartbroken message.
 ## Features
 - Detects if a webpage is built with Oracle APEX.
 - Displays a red heart and information on Oracle APEX pages including the APEX version
+- Shows the APEX version (e.g. `26.1`) on the toolbar icon
+- Shows the Universal Theme version
+- Detects APEX apps embedded in iframes
+- Copy the page's APEX info as JSON or a Markdown table
+- Share an APEX site on LinkedIn (only the site's address is shared, never the full URL, which can contain a session ID)
+- **Hearts collected** (opt-in): counts the Oracle APEX sites you visit. Site names are encrypted (AES-GCM) and stored only on your device; private browsing is never recorded. Share your heart count on LinkedIn.
+- Light and dark mode
+- Available in English, Polish, Dutch, German, Spanish and French
 - Shows a heartbroken emoji with a randomised sad message for non-Oracle APEX pages.
 
 ## Screenshots
@@ -41,9 +49,57 @@ For pages not using Oracle APEX, it displays a heartbroken message.
 
 - [Universal Theme](https://apex.oracle.com/ut)
 
+## Development
+
+The extension lives in `src/` and has no build step. Load it in Chrome with **Load unpacked** on `chrome://extensions`, choosing the `src` folder.
+
+```
+npm ci
+npm run lint
+npm run check-locales
+```
+
+Translations are in `src/_locales/<lang>/messages.json`. `check-locales` fails if any language is missing a message that English has.
+
+## Releasing
+
+Releases publish automatically. Bump `version` in `src/manifest.json`, add a Release History entry, commit, then push a matching tag:
+
+```
+git tag v26.2.0
+git push origin v26.2.0
+```
+
+The **Release** workflow then runs the checks, confirms the tag matches the manifest version, zips `src/`, uploads it to the Chrome Web Store, submits it for review, and creates a GitHub release with the zip attached.
+
+### One-time setup (Chrome Web Store API v2)
+
+Someone with access to the Pretius publisher account in the Chrome Web Store Developer Dashboard needs to:
+
+1. In Google Cloud Console, enable the **Chrome Web Store API** and create an **OAuth client ID** (Web application, redirect URI `https://developers.google.com/oauthplayground`).
+2. In the [OAuth 2.0 Playground](https://developers.google.com/oauthplayground), use your own client ID and secret with scope `https://www.googleapis.com/auth/chromewebstore`, authorise, and exchange for a **refresh token**.
+3. Find the **publisher ID** under Publisher > Settings in the Developer Dashboard.
+4. Add these repository secrets in GitHub (Settings > Secrets and variables > Actions):
+   - `CWS_CLIENT_ID`
+   - `CWS_CLIENT_SECRET`
+   - `CWS_REFRESH_TOKEN`
+   - `CWS_PUBLISHER_ID`
+
+The Google account needs 2-step verification. See [Use the Chrome Web Store API](https://developer.chrome.com/docs/webstore/using-api).
+
 # Release History
 
-26.1.0 : October 2026
+26.2.0 : November 2026
+* APEX version shown on the toolbar icon
+* Universal Theme version shown in the popup
+* Detects APEX apps embedded in iframes
+* Copy APEX info as JSON or Markdown
+* Share a site, or your heart count, on LinkedIn
+* Hearts collected: opt-in, encrypted, on-device count of APEX sites visited
+* Dark mode
+* Translations: Polish, Dutch, German, Spanish, French
+* Author and company links now go to LinkedIn
+* Automated release to the Chrome Web Store on version tags
 * Popup now checks the page when opened, so tabs open before install/update are detected
 * Icon is set per tab (fixes wrong icon with multiple windows)
 * Security: page-supplied values are rendered as text, never HTML

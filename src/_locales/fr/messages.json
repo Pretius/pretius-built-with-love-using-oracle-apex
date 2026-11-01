@@ -1,0 +1,53 @@
+{
+  "extDescription": { "message": "Affiche un cœur rouge et des infos sur les pages web créées avec amour avec Oracle APEX" },
+  "builtWith": { "message": "Fait avec ❤️ et {apex}" },
+  "heartbroken1": { "message": "Pas d'{apex}. Le chien ne me regarde plus 💔" },
+  "heartbroken2": { "message": "Pas d'{apex}. Pas fâché, juste déçu 💔" },
+  "heartbroken3": { "message": "Pas d'{apex}. Bon, je vais rester assis là 💔" },
+  "heartbroken4": { "message": "Pas d'{apex}. J'ai annulé le gâteau 💔" },
+  "heartbroken5": { "message": "Pas d'{apex}. Je ne reviendrai pas 💔" },
+  "heartbroken6": { "message": "Pas d'{apex}. Quelqu'un a tout codé à la main. Exprès 💔" },
+  "heartbroken7": { "message": "Pas d'{apex}. Je parie que leur sprint a duré six semaines 💔" },
+  "heartbroken8": { "message": "Pas d'{apex}. Scènes de folie 💔" },
+  "heartbroken9": { "message": "Pas d'{apex}, mon fils pleure maintenant, merci bien 💔" },
+  "attribute": { "message": "Attribut" },
+  "value": { "message": "Valeur" },
+  "foundInFrame": {
+    "message": "Trouvé dans un cadre intégré sur $HOST$",
+    "placeholders": { "host": { "content": "$1", "example": "example.com" } }
+  },
+  "copyMenu": { "message": "Copier" },
+  "copyJson": { "message": "Copier le JSON" },
+  "copyMarkdown": { "message": "Copier le Markdown" },
+  "copied": { "message": "Copié !" },
+  "copyFailed": { "message": "Échec de la copie" },
+  "shareSite": { "message": "Partager sur LinkedIn" },
+  "shareSiteText": {
+    "message": "$SITE$ est fait avec ❤️ et #OracleAPEX\n\nRepéré avec l'extension « Built with ❤️ using Oracle APEX » : $STORE$",
+    "placeholders": {
+      "site": { "content": "$1", "example": "https://example.com/" },
+      "store": { "content": "$2", "example": "https://chromewebstore.google.com/..." }
+    }
+  },
+  "heartsIntro": { "message": "Collectionnez des cœurs : comptez les sites Oracle APEX que vous trouvez. Stockés chiffrés, uniquement sur cet appareil." },
+  "heartsTurnOn": { "message": "Commencer la collecte" },
+  "heartsTurnOff": { "message": "Arrêter la collecte" },
+  "heartsCount": {
+    "message": "❤️ Cœurs collectés : $COUNT$",
+    "placeholders": { "count": { "content": "$1", "example": "12" } }
+  },
+  "heartsShow": { "message": "Afficher les sites" },
+  "heartsMenu": { "message": "Options des cœurs" },
+  "heartsShare": { "message": "Partager mes cœurs" },
+  "heartsShareText": {
+    "message": "Cœurs collectés sur des sites faits avec #OracleAPEX : $COUNT$ ❤️\n\nCollectionnez les vôtres avec l'extension « Built with ❤️ using Oracle APEX » : $STORE$",
+    "placeholders": {
+      "count": { "content": "$1", "example": "12" },
+      "store": { "content": "$2", "example": "https://chromewebstore.google.com/..." }
+    }
+  },
+  "heartsClear": { "message": "Effacer" },
+  "heartsClearConfirm": { "message": "Cliquez à nouveau pour effacer" },
+  "heartsEmpty": { "message": "Pas encore de cœurs. Visitez quelques sites Oracle APEX !" },
+  "heartsError": { "message": "Impossible de charger vos cœurs." }
+}

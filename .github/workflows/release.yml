@@ -1,0 +1,55 @@
+name: Release
+
+# Push a tag like v26.2.0 (matching src/manifest.json) to check, package,
+# publish to the Chrome Web Store and create a GitHub release.
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      ZIP: built-with-love-${{ github.ref_name }}.zip
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run check-locales
+
+      - name: Check tag matches manifest version
+        run: |
+          version="v$(node -p "require('./src/manifest.json').version")"
+          if [ "$version" != "$GITHUB_REF_NAME" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match manifest version $version"
+            exit 1
+          fi
+
+      - name: Package extension
+        working-directory: src
+        run: zip -r "../$ZIP" . -x '.*'
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ZIP }}
+          path: ${{ env.ZIP }}
+
+      - name: Publish to Chrome Web Store
+        run: node tools/publish-cws.mjs "$ZIP"
+        env:
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          CWS_PUBLISHER_ID: ${{ secrets.CWS_PUBLISHER_ID }}
+          CWS_EXTENSION_ID: bhlkijnameeejlifhlmhcfjgmigdpjae
+
+      - name: Create GitHub release
+        run: gh release create "$GITHUB_REF_NAME" "$ZIP" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

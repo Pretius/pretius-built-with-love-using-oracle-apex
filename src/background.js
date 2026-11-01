@@ -1,17 +1,22 @@
-import { detectApex, setActionIcon } from './lib/apex-detect.js';
+import { detectApex, setActionState, NOT_APEX } from './lib/apex-detect.js';
+import { recordHeart } from './lib/hearts.js';
 
-async function refreshTab(tabId) {
-  const { isApex } = await detectApex(tabId);
-  await setActionIcon(tabId, isApex);
+async function refreshTab(tab) {
+  const result = await detectApex(tab.id);
+  await setActionState(tab.id, result);
+  // Never record private browsing.
+  if (result.isApex && !tab.incognito) {
+    recordHeart(result.host).catch((error) => console.debug('Could not record heart:', error));
+  }
 }
 
-// Icons are set per tab, so Chrome handles tab switching and multiple windows.
-chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+// Icons and badges are set per tab, so Chrome handles tab switching and multiple windows.
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'loading') {
-    // Clear any stale red heart while the new page loads.
-    setActionIcon(tabId, false);
+    // Clear any stale red heart and version while the new page loads.
+    setActionState(tabId, NOT_APEX);
   } else if (changeInfo.status === 'complete') {
-    refreshTab(tabId);
+    refreshTab(tab);
   }
 });
 
@@ -20,7 +25,7 @@ chrome.runtime.onInstalled.addListener(async () => {
   const tabs = await chrome.tabs.query({});
   for (const tab of tabs) {
     if (tab.id !== undefined) {
-      refreshTab(tab.id);
+      refreshTab(tab);
     }
   }
 });

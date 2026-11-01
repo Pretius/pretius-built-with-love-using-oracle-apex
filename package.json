@@ -1,0 +1,15 @@
+{
+  "name": "built-with-love-using-oracle-apex",
+  "private": true,
+  "type": "module",
+  "description": "Chrome extension: red heart and info on webpages built with Oracle APEX",
+  "scripts": {
+    "lint": "eslint .",
+    "check-locales": "node tools/check-locales.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
+    "globals": "^17.13.0"
+  }
+}

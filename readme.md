@@ -74,18 +74,21 @@ The **Release** workflow then runs the checks, confirms the tag matches the mani
 
 ### One-time setup (Chrome Web Store API v2)
 
-Someone with access to the Pretius publisher account in the Chrome Web Store Developer Dashboard needs to:
+Publishing signs in with a Google Cloud **service account**. The publisher (the Google account that owns the extension in the Developer Dashboard) needs to:
 
-1. In Google Cloud Console, enable the **Chrome Web Store API** and create an **OAuth client ID** (Web application, redirect URI `https://developers.google.com/oauthplayground`).
-2. In the [OAuth 2.0 Playground](https://developers.google.com/oauthplayground), use your own client ID and secret with scope `https://www.googleapis.com/auth/chromewebstore`, authorise, and exchange for a **refresh token**.
-3. Find the **publisher ID** under Publisher > Settings in the Developer Dashboard.
-4. Add these repository secrets in GitHub (Settings > Secrets and variables > Actions):
-   - `CWS_CLIENT_ID`
-   - `CWS_CLIENT_SECRET`
-   - `CWS_REFRESH_TOKEN`
+1. In [Google Cloud Console](https://console.cloud.google.com), pick or create a project and enable the **Chrome Web Store API** (APIs & Services > Library).
+2. Go to **IAM & Admin > Service Accounts > Create service account**. Give it a name; don't grant it any roles.
+3. Open the service account, go to **Keys > Add key > Create new key > JSON**. A key file downloads.
+4. In the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole), open **Account**, and add the service account's email address (ends in `.iam.gserviceaccount.com`). Only one service account can be added per publisher.
+5. Copy the **Publisher ID** from the Developer Dashboard (Account / Settings).
+6. Add these repository secrets in GitHub (Settings > Secrets and variables > Actions):
+   - `CWS_SERVICE_ACCOUNT_KEY`: the entire contents of the JSON key file
    - `CWS_PUBLISHER_ID`
+7. Delete the downloaded key file from your computer.
 
-The Google account needs 2-step verification. See [Use the Chrome Web Store API](https://developer.chrome.com/docs/webstore/using-api).
+The publisher's Google account needs 2-step verification. See [Use a service account with the Chrome Web Store API](https://developer.chrome.com/docs/webstore/service-accounts).
+
+The publish script also still accepts an OAuth refresh token instead (`CWS_CLIENT_ID`, `CWS_CLIENT_SECRET`, `CWS_REFRESH_TOKEN`), but that needs a published OAuth consent screen, which isn't practical for a personal account.
 
 # Release History
 
